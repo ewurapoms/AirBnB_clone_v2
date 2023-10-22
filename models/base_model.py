@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """This module defines a base class for all models in our hbnb clone"""
-from uuid import uuid4
 import models
-from datetime import datetime
 import sqlalchemy
+from uuid import uuid4
+from datetime import datetime
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
@@ -64,7 +64,7 @@ class BaseModel:
         except Exception:
             pass
         dictionary.update({'__class__':
-                               (str(type(self)).split('.')[-1]).split('\'')[0]})
+                          (str(type(self)).split('.')[-1]).split('\'')[0]})
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
 

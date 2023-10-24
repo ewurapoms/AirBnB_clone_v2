@@ -17,10 +17,8 @@ from models.review import Review
 from models.engine.file_storage import FileStorage
 
 
-
 class TestCommand(unittest.TestCase):
     """Class that tests the console"""
-    
     def setUp(self):
         """Function empties file.json"""
         FileStorage._FileStorage__objects = {}
@@ -31,20 +29,20 @@ class TestCommand(unittest.TestCase):
         """test the create command"""
         storage = FileStorage()
         storage.reload()
-        ctest = r'[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}'
+        ctst = r'[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}'
         with self.assertRaises(AttributeError):
             with patch('sys.stdout', new=io.StringIO()) as f:
                 HBNBCommand().onecmd("create BaseModel updated_at=0.0"
                                      " created_at=0.0")
         with patch('sys.stdout', new=io.StringIO()) as f:
             HBNBCommand().onecmd('create User email="hbnb@project.fr"'
-                                 ' password="graceabbie@alx"')
+                                 ' password="graceabie@alx"')
         result = f.getvalue().strip()
         self.assertRegex(result, opt)
         email = storage.all()[f'User.{result}'].email
         self.assertEqual(email, "hbnb@project.fr")
         password = storage.all()[f'User.{result}'].password
-        self.assertEqual(password, "graceabbie@alx")
+        self.assertEqual(password, "graceabie@alx")
         with patch('sys.stdout', new=io.StringIO()) as f:
             HBNBCommand().onecmd('create State grace="abbie"'
                                  ' num="7" pi="3.14"')
@@ -60,7 +58,7 @@ class TestCommand(unittest.TestCase):
             HBNBCommand().onecmd('create City grace="abbie" num="7"'
                                  ' pi="3.14"')
         result = f.getvalue().strip()
-        self.assertRegex(result, ctest)
+        self.assertRegex(result, ctst)
         grace = storage.all()[f'City.{result}'].grace
         self.assertEqual(grace, "abbie")
         num = storage.all()[f'City.{result}'].num
@@ -82,7 +80,7 @@ class TestCommand(unittest.TestCase):
             HBNBCommand().onecmd('create Place grace="abbie"'
                                  ' num="7" pi="3.14"')
         result = f.getvalue().strip()
-        self.assertRegex(result, ctest)
+        self.assertRegex(result, ctst)
         grace = storage.all()[f'Place.{result}'].abbie
         self.assertEqual(grace, "abbie")
         num = storage.all()[f'Place.{result}'].num
@@ -93,7 +91,7 @@ class TestCommand(unittest.TestCase):
             HBNBCommand().onecmd('create Review grace="abbie"'
                                  ' num="7" pi="3.14"')
         result = f.getvalue().strip()
-        self.assertRegex(result, ctest)
+        self.assertRegex(result, ctst)
         grace = storage.all()[f'Review.{result}'].grace
         self.assertEqual(grace, "abbie")
         num = storage.all()[f'Review.{result}'].num
@@ -102,12 +100,12 @@ class TestCommand(unittest.TestCase):
         self.assertEqual(pi, '3.14')
         with patch('sys.stdout', new=io.StringIO()) as f:
             HBNBCommand().onecmd('create')
-        ctest = '** class name missing **\n'
-        self.assertEqual(f.getvalue(), ctest)
+        ctst = '** class name missing **\n'
+        self.assertEqual(f.getvalue(), ctst)
         with patch('sys.stdout', new=io.StringIO()) as f:
             HBNBCommand().onecmd('create NotClass')
-        ctest = '** class doesn\'t exist **\n'
-        self.assertEqual(f.getvalue(), ctest)
+        ctst = '** class doesn\'t exist **\n'
+        self.assertEqual(f.getvalue(), ctst)
 
     def testPycodeStyle(self):
         """Pycodestyle test for console.py"""

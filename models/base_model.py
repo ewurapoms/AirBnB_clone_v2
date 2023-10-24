@@ -30,7 +30,7 @@ class BaseModel:
             for key, val in kwargs.items():
                 if key in ("created_at", "updated_at"):
                     if isinstance(val, str):
-                        val = datetime.strptime(val,'%Y-%m-%dT%H:%M:%S.%f')
+                        val = datetime.strptime(val, '%Y-%m-%dT%H:%M:%S.%f')
                 if "__class__" not in key:
                     setattr(self, key, val)
 

@@ -38,7 +38,7 @@ class TestCommand(unittest.TestCase):
             HBNBCommand().onecmd('create User email="hbnb@project.fr"'
                                  ' password="graceabie@alx"')
         result = f.getvalue().strip()
-        self.assertRegex(result, opt)
+        self.assertRegex(result, ctst)
         email = storage.all()[f'User.{result}'].email
         self.assertEqual(email, "hbnb@project.fr")
         password = storage.all()[f'User.{result}'].password
@@ -47,7 +47,7 @@ class TestCommand(unittest.TestCase):
             HBNBCommand().onecmd('create State grace="abbie"'
                                  ' num="7" pi="3.14"')
         result = f.getvalue().strip()
-        self.assertRegex(result, opt)
+        self.assertRegex(result, ctst)
         grace = storage.all()[f'State.{result}'].grace
         self.assertEqual(grace, "abbie")
         num = storage.all()[f'State.{result}'].num
@@ -69,7 +69,7 @@ class TestCommand(unittest.TestCase):
             HBNBCommand().onecmd('create Amenity grace="abbie"'
                                  ' num="7" pi="3.14"')
         result = f.getvalue().strip()
-        self.assertRegex(result, opt)
+        self.assertRegex(result, ctst)
         grace = storage.all()[f'Amenity.{result}'].grace
         self.assertEqual(grace, "abbie")
         num = storage.all()[f'Amenity.{result}'].num
@@ -81,7 +81,7 @@ class TestCommand(unittest.TestCase):
                                  ' num="7" pi="3.14"')
         result = f.getvalue().strip()
         self.assertRegex(result, ctst)
-        grace = storage.all()[f'Place.{result}'].abbie
+        grace = storage.all()[f'Place.{result}'].grace
         self.assertEqual(grace, "abbie")
         num = storage.all()[f'Place.{result}'].num
         self.assertEqual(num, '7')

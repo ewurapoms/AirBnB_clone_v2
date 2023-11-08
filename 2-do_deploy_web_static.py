@@ -26,21 +26,29 @@ def do_pack():
         return archive_path
 
 
+if __name__ == "__main__":
+    archive_path = do_pack()
+    if archive_path:
+        print("Web static packed: {}".format(archive_path))
+    else:
+        print("Packaging failed.")
+
 def do_deploy(archive_path):
     " function distributes the archive"""
-    if os.path.exists(archive_path):
-        stored = archive_path.split('/')[1]
-        arch_path = "/tmp/{}".format(archive)
-        directory = archive.split('.')[0]
-        updated = "/data/web_static/releases/{}/".format(directory)
-
-        put(archive_path, arch_path)
-        run("sudo mkdir -p {}".format(updated))
-        run("sudo tar -xzf {} -C {}".format(arch_path, updated))
-        run("sudo rm {}".format(arch_path))
-        run("sudo mv -f {}web_static/* {}".format(updated, updated))
-        run("sudo rm -rf {}web_static".format(updated))
-        run("sudo rm -rf /data/web_static/current")
-        run("sudo ln -s {} /data/web_static/current".format(updated))
+    if not os.path.exists(archive_path):
+        return False
+    try:
+        filename = archive_path.split("/")[-1]
+        arg_1 = filename.split(".")[0]
+        dir_path = "/data/web_static/releases/"
+        put(archive_path, "/tmp/")
+        run("mkdir -p {}{}/".format(dir_path, arg_1))
+        run("tar -xzf /tmp/{} -C {}{}/".format(filename, dir_path, arg_1))
+        run("rm /tmp/{}".format(filename))
+        run("mv {0}{1}/web_static/* {0}{1}/".format(dir_path, arg_1))
+        run("rm -rf {}{}/web_static".format(dir_path, arg_1))
+        run("rm -rf /data/web_static/current")
+        run("ln -s {}{}/ /data/web_static/current".format(dir_path, arg_1))
         return True
-    return False
+    except Exception as e:
+        return False

@@ -32,7 +32,7 @@ def do_deploy(archive_path):
         stored = archive_path.split('/')[1]
         arch_path = "/tmp/{}".format(archive)
         directory = archive.split('.')[0]
-        updated = "/data/web_static/releases/{}/".format(folder)
+        updated = "/data/web_static/releases/{}/".format(directory)
 
         put(archive_path, arch_path)
         run("sudo mkdir -p {}".format(updated))

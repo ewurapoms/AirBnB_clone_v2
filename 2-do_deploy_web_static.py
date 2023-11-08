@@ -11,6 +11,7 @@ import os
 env.hosts = ['100.25.191.16', '52.91.118.253']
 env.user = "ubuntu"
 
+
 def do_pack():
     """ function generates a .tgz archive """
 
@@ -33,11 +34,9 @@ def do_deploy(archive_path):
         archived_file = "/tmp/" + archived_file
         put(archive_path, "/tmp/")
         run("mkdir -p {}".format(updated))
-        run("tar -xzf {} -C {}/".format(archived_file,
-                                             updated))
+        run("tar -xzf {} -C {}/".format(archived_file, updated))
         run("rm {}".format(archived_file))
-        run("mv {}/web_static/* {}".format(updated,
-                                                updated))
+        run("mv {}/web_static/* {}".format(updated, updated))
         run("rm -rf {}/web_static".format(updated))
         run("rm -rf /data/web_static/current")
         run("ln -s {} /data/web_static/current".format(updated))

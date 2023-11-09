@@ -50,8 +50,9 @@ def do_deploy(archive_path):
 
 def deploy():
     """Create and distributes an archive to web servers"""
-    try:
-        path_updated = do_pack()
-        return do_deploy(path_updated)
-    except Exception as e:
+    archive_path = do_pack()
+
+    if archive_path is None:
         return False
+
+    return do_deploy(archive_path)

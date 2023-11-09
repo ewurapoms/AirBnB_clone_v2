@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 """
-Fabric script (based on the file 2-do_deploy_web_static.py) that creates
-and distributes an archive to your web servers, using the function deploy
+Fabric script (based on the file 1-pack_web_static.py) that distributes
+an archive to your web servers, using the function do_deploy
 """
-import os.path
-from fabric.api import *
+
 from datetime import datetime
-from fabric.operations import env, put, run
+from fabric.api import *
+import os.path
+import os
 
 env.hosts = ['100.25.191.16', '52.91.118.253']
 env.user = "ubuntu"

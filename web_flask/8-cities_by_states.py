@@ -2,6 +2,7 @@
 """Start a Flask web application:Cities by states"""
 
 from models import storage
+from models.city import City
 from models.state import State
 from flask import Flask, render_template
 

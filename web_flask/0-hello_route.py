@@ -6,18 +6,18 @@ Routes:
 /: display "Hello HBNB!"
 Must include: strict_slashes=False in route def
 """
-#installation : pip3 install Flask
 
 from flask import Flask
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
+
 @app.route('/')
 def hello_hbnb():
     """
     strict_slashes set to False enables the
-    URL maintain functionality with or without 
+    URL maintain functionality with or without
     the / symbol at the end during routing
     """
     return "Hello HBNB!"

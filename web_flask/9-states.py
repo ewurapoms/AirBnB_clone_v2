@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Start a Flask web application"""
+"""Starts a Flask web application: HBNB filters"""
 
 from flask import Flask, render_template
 from models import storage

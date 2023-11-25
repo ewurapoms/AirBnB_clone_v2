@@ -1,28 +1,26 @@
 #!/usr/bin/python3
 """Start a Flask web application:Cities by states"""
 
+from flask import Flask, render_template
 from models import storage
 from models.city import City
 from models.state import State
-from flask import Flask, render_template
-
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-
-
-@app.teardown_appcontext
-def teardown(self):
-    """ends database session"""
-    storage.close()
 
 
 @app.route('/cities_by_states')
 def cities_by_state():
     """shows an HTML page that lists all states & cities"""
     states = storage.all(State).values()
-    newStates = sorted(states, key=lambda s: s.name)
-    return render_template('8-cities_by_states.html', states=newStates)
+    return render_template('8-cities_by_states.html', states=states)
+
+
+@app.teardown_appcontext
+def teardown(self):
+    """ends database session"""
+    storage.close()
 
 
 if __name__ == "__main__":

@@ -20,7 +20,7 @@ def teardown(self):
 @app.route('/states')
 def states():
     """shows an HTML page that lists all states & cities"""
-    states = storage.all(State)
+    states = storage.all(State).values()
     return render_template('9-states.html', state=states)
 
 

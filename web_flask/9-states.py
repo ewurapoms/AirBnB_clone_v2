@@ -11,6 +11,12 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 
+@app.teardown_appcontext
+def teardown(self):
+    """ends database session"""
+    storage.close()
+
+
 @app.route('/states')
 def states():
     """shows an HTML page that lists all states & cities"""
@@ -25,12 +31,6 @@ def states_id(id):
         if state.id == id:
             return render_template("9-states.html", state=state)
     return render_template("9-states.html")
-
-
-@app.teardown_appcontext
-def teardown(self):
-    """ends database session"""
-    storage.close()
 
 
 if __name__ == "__main__":

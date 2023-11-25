@@ -20,8 +20,10 @@ def teardown(self):
 def cities_by_state():
     """shows an HTML page that lists all states & cities"""
     states = storage.all(State).values()
-    return render_template('8-cities_by_states.html', states=states)
+    newStates = sorted(states, key=lambda s: s.name)
+    return render_template('8-cities_by_states.html', states=newStates)
 
 
 if __name__ == "__main__":
+    storage.reload()
     app.run(host='0.0.0.0', port=5000)

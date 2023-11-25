@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Starts a Flask web applicaton: n = int"""
 from flask import Flask
-from flask import abort
+from flask import abort, render_template
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False

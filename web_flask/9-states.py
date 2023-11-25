@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Start a Flask web application: HBNB filters"""
+"""Start a Flask web application"""
 
 from flask import Flask, render_template
 from models import storage
@@ -17,14 +17,14 @@ def teardown(self):
 
 @app.route('/states', strict_slashes=False)
 def states():
-    """prints an HTML page with a list of all states & cities"""
+    """Displays a HTML page with a list of all states & cities"""
     states = storage.all(State)
     return render_template('9-states.html', state=states)
 
 
 @app.route("/states/<id>", strict_slashes=False)
 def states_id(id):
-    """prints an HTML page with info about <id>, if it exists"""
+    """Displays an HTML page with info about <id>, if it exists."""
     for state in storage.all(State).values():
         if state.id == id:
             return render_template("9-states.html", state=state)

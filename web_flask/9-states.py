@@ -5,9 +5,11 @@ Starts a Flask web application:
 -routes: /states and /states/<id>
 
 """
+
 from models import storage
 from flask import Flask
 from flask import render_template
+from models.state import State
 
 app = Flask(__name__)
 
@@ -32,11 +34,11 @@ Shows an HTML page with information about <id> if it is present."""
 
 
 @app.teardown_appcontext
-def teardown(exc):
+def teardown(self):
     """
 Removes the existing SQLAlchemy session.."""
     storage.close()
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", port=5000)

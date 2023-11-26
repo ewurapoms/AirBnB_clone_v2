@@ -1,26 +1,25 @@
 #!/usr/bin/python3
-"""Start a Flask web application: States by State"""
+"""Start a Flask web application"""
 
+from flask import Flask, render_template
 from models import storage
-from flask import Flask
-from flask import render_template
+from models.state import State
 
 
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
-@app.route('/states')
+@app.route('/states', strict_slashes=False)
 def states():
     """prints HTML page with a list of all states & cities"""
-    states = storage.all('State')
+    states = storage.all(State)
     return render_template('9-states.html', state=states)
 
 
-@app.route('/states/<id>')
+@app.route('/states/<id>', strict_slashes=False)
 def states_id(id):
-    """shows an HTML page with info about <id>, if it exists."""
-    for state in storage.all('State').values():
+    """shows HTML page with info about <id>, if it exists."""
+    for state in storage.all(State).values():
         if state.id == id:
             return render_template('9-states.html', state=state)
     return render_template('9-states.html')
